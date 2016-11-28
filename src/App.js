@@ -20,11 +20,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
-  console.log('mapStateToProps',state,ownProps);
-  return {
-    user: state.user
-  }
+function mapStateToProps (state) {
+  return {...state.userstate}
 }
 
 function mapDispatchToProps(dispatch) {
