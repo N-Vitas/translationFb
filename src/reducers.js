@@ -1,5 +1,10 @@
 const initialState = {
-  user: 'Unknown User'
+  user: 'Unknown User',
+  like:0,
+  love:0,
+  post_id:'',
+	access_token:'',
+	connect:false,
 };
 
 export default function userstate(state = initialState,action) {
