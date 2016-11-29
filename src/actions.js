@@ -24,3 +24,16 @@ export function setUser(user) {
     }, 3000)
   }
 }
+
+export function setAccessToken(token){
+	return {
+		type: 'SAVE_ACCESS_TOKEN',
+		token:token,
+	}
+}
+export function setPostId(id){
+	return {
+		type: 'SAVE_POST_ID',
+		id:id,
+	}
+}

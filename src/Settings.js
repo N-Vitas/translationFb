@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import { setUser } from './actions';
+import { setUser,setAccessToken,setPostId } from './actions';
 
 import {
   Grid,
@@ -14,7 +14,8 @@ import {
   ControlLabel,
   FormControl,
   HelpBlock,
-  Button
+  Button,
+  Jumbotron
 } from 'react-bootstrap';
 
 class Settings extends Component {
@@ -22,11 +23,17 @@ class Settings extends Component {
     super(props)
     this.state ={
       valueToken:'',
+      valuePostId:'',
     }
     this.changeToken = this.changeToken.bind(this)
+    this.changePostId = this.changePostId.bind(this)
+    
   }
   changeToken(e){
     this.setState({ valueToken: e.target.value });
+  }
+  changePostId(e){
+    this.setState({ valuePostId: e.target.value }); 
   }
   render() {
     return (
@@ -39,21 +46,47 @@ class Settings extends Component {
         <Grid className="white">
           <Row>
             <Col md={12} xs={12}>
+              <Jumbotron>
+                <p>Планирую тут сделать график подключения к api fb.</p>                
+                <p>{this.props.post_id}</p>
+                <p>{this.props.access_token}</p>
+              </Jumbotron>
+            </Col>
+            <Col md={12} xs={12}>
               <Row>
                 <Form horizontal>
                   <FormGroup controlId="formHorizontalToken">
                     <Col componentClass={ControlLabel} sm={2}>
-                      Access Token
+                      Ключ доступа
                     </Col>
                     <Col sm={8}>
                       <FormControl 
                       type="text"
                       value={this.state.valueToken}
-                      placeholder="Введите acess token"
+                      placeholder="Введите ключ доступа"
                       onChange={this.changeToken}/>
                     </Col>
                     <Col sm={2}>
-                      <Button  bsStyle="success">
+                      <Button onClick={()=>this.props.actionAccessToken(this.state.valueToken)} bsStyle="success">
+                        Сохранить
+                      </Button>
+                    </Col>
+                  </FormGroup>
+                </Form>
+                <Form horizontal>
+                  <FormGroup controlId="formHorizontalPostId">
+                    <Col componentClass={ControlLabel} sm={2}>
+                      Индификатор поста
+                    </Col>
+                    <Col sm={8}>
+                      <FormControl 
+                      type="text"
+                      value={this.state.valuePostId}
+                      placeholder="Введите индификатор поста"
+                      onChange={this.changePostId}/>
+                    </Col>
+                    <Col sm={2}>
+                      <Button onClick={()=>this.props.actionPostId(this.state.valuePostId)} bsStyle="success">
                         Сохранить
                       </Button>
                     </Col>
@@ -76,6 +109,12 @@ function mapDispatchToProps(dispatch) {
   return {
     appAction:(user)=>{
       dispatch(setUser(user));
+    },
+    actionAccessToken:(str)=>{
+      dispatch(setAccessToken(str));
+    },
+    actionPostId:(str)=>{
+      dispatch(setPostId(str));
     }    
   }
 }

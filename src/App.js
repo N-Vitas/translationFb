@@ -24,7 +24,9 @@ class App extends Component {
         <Row className="plases">
           <Col xs={12} md={12}>
             <div className="title">
-              <h1>чем вы едите хинкали <br/>руками или приборами?</h1>
+              <h1>чем вы едите хинкали <br/>руками или приборами?</h1>               
+                <p>{this.props.post_id}</p>
+                <p>{this.props.access_token}</p>
             </div>
           </Col>
 
